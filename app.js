@@ -3,7 +3,7 @@ var selectedPlayersIds = [];
 var matchHistory = [];
 var currentTeams = { a: [], b: [] };
 
-var GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzmv9q4YjQ3hfvvRYGrPyBZQcoMtGSX_a-HK7T6zHymgf-3ODMH9Jos8NsCk-LD9Kp1/exec"; 
+var GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwpyrNwxyTHpvGdJymlMTxbkko6j7wxIFQGK_StMWhop890slGifHyHy09gOBB2weCB/exec"; 
 
 window.onload = function() {
     var p = localStorage.getItem('fc_players');
