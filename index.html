@@ -16,22 +16,18 @@
         <button onclick="showSection('history-section')">Storico</button>
     </div>
 </header>
-
 <div class="container">
-    <div id="cloud-status" style="font-size:10px; text-align:center; margin-bottom:10px; color:#7f8c8d;">Verifica sincronizzazione...</div>
-
+    <div id="cloud-status" style="font-size:10px; text-align:center; margin-bottom:10px; color:#7f8c8d;">Sincronizzazione...</div>
     <section id="main-section">
         <div class="card">
             <h2>Convocati (<span id="selected-count">0</span>/10)</h2>
             <ul id="selection-player-list"></ul>
-            <button class="success" onclick="generateTeams()">Genera Squadre</button>
+            <button class="success" onclick="generateTeams()">Genera Squadre Bilanciate</button>
         </div>
-
         <div id="teams-result" class="hidden">
-            <div class="team-box" id="team-a"><h3>SQUADRA A</h3><ul></ul></div>
-            <div class="team-box" id="team-b"><h3>SQUADRA B</h3><ul></ul></div>
+            <div class="team-box" id="team-a"></div>
+            <div class="team-box" id="team-b"></div>
             <button class="whatsapp-btn" onclick="copyTeamsToClipboard()">Copia WhatsApp 📱</button>
-            
             <div class="card">
                 <h3>Risultato Finale</h3>
                 <div class="win-buttons">
@@ -39,36 +35,30 @@
                     <button onclick="saveMatch('Pareggio')" style="background:#95a5a6">Pareggio</button>
                     <button onclick="saveMatch('B')" style="background:#3498db">Vince B</button>
                 </div>
-                <div style="margin-top:15px">
-                    <label style="font-size:12px; font-weight:bold">MVP:</label>
-                    <select id="mvp-select"></select>
-                </div>
+                <div style="margin-top:15px"><label>MVP:</label><select id="mvp-select"></select></div>
             </div>
         </div>
     </section>
-
     <section id="admin-section" class="hidden">
         <div class="card">
             <h2>Nuovo Giocatore</h2>
             <input type="text" id="player-name" placeholder="Nome">
             <div class="stats-inputs">
-                <div class="stat-col"><label>Corsa</label><input type="number" id="stat-run" placeholder="1-10"></div>
-                <div class="stat-col"><label>Piedi</label><input type="number" id="stat-foot" placeholder="1-10"></div>
-                <div class="stat-col"><label>Vers.</label><input type="number" id="stat-vers" placeholder="1-10"></div>
+                <div class="stat-col"><label>Corsa</label><input type="number" id="stat-run"></div>
+                <div class="stat-col"><label>Piedi</label><input type="number" id="stat-foot"></div>
+                <div class="stat-col"><label>Vers.</label><input type="number" id="stat-vers"></div>
             </div>
             <button class="success" onclick="addPlayer()">Aggiungi Giocatore</button>
         </div>
-        <button onclick="syncFromCloud()" style="background:#3498db; color:white; margin-bottom:15px; font-size:12px;">🔄 Forza Sincronizzazione Cloud</button>
+        <button onclick="syncFromCloud()" style="background:#3498db; color:white; margin-bottom:15px; font-size:12px;">🔄 Forza Sincronizzazione</button>
         <ul id="master-player-list"></ul>
     </section>
-
     <section id="history-section" class="hidden">
         <h2>Storico & Classifica</h2>
         <div id="history-list"></div>
-        <button onclick="clearHistory()" style="background:#e74c3c; color:white; margin-top:30px; border:none; padding:12px; border-radius:8px; width:100%;">Reset Totale</button>
+        <button onclick="clearHistory()" style="background:#e74c3c; color:white; margin-top:30px;">Reset Totale</button>
     </section>
 </div>
-
 <script src="app.js"></script>
 </body>
 </html>
