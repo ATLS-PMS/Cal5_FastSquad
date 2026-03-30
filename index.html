@@ -7,38 +7,42 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
 <header>
-    <h1>La Macelleria PMS</h1>
+    <h1>La MAcelleria PMS</h1>
     <div id="nav-tabs">
-       <button onclick="showSection('main-section')">Campo</button>
+        <button onclick="showSection('main-section')">Campo</button>
         <button onclick="showSection('admin-section')">Giocatori</button>
         <button onclick="showSection('history-section')">Storico</button>
     </div>
 </header>
+
 <div class="container">
-    <div id="cloud-status" style="font-size:10px; text-align:center; margin-bottom:10px; color:#7f8c8d;">Sincronizzazione...</div>
+    <div id="sync-info">
+        <span id="cloud-status">Inizializzazione...</span><br>
+        <span id="last-sync-time">---</span>
+    </div>
+
     <section id="main-section">
         <div class="card">
             <h2>Convocati (<span id="selected-count">0</span>/10)</h2>
             <ul id="selection-player-list"></ul>
-            <button class="success" onclick="generateTeams()">Genera Squadre Bilanciate</button>
+            <button class="success-btn" onclick="generateTeams()">Genera Squadre</button>
         </div>
-        <div id="teams-result" class="hidden">
-            <div class="team-box" id="team-a"></div>
-            <div class="team-box" id="team-b"></div>
-            <button class="whatsapp-btn" onclick="copyTeamsToClipboard()">Copia WhatsApp 📱</button>
-            <div class="card">
-                <h3>Risultato Finale</h3>
-                <div class="win-buttons">
-                    <button onclick="saveMatch('A')" style="background:#2ecc71">Vince A</button>
-                    <button onclick="saveMatch('Pareggio')" style="background:#95a5a6">Pareggio</button>
-                    <button onclick="saveMatch('B')" style="background:#3498db">Vince B</button>
-                </div>
-                <div style="margin-top:15px"><label>MVP:</label><select id="mvp-select"></select></div>
-            </div>
+     <div id="teams-result" class="hidden">
+    <div class="team-box" id="team-a-container"></div>
+    <div class="team-box" id="team-b-container"></div>
+
+    <div class="card result-card">
+        <h3>VERDETTO FINALE</h3>
+        <select id="mvp-select"></select>
+        <div class="win-actions">
+            <button onclick="saveMatch('A')" class="btn-win-a">VINCE SQUADRA A</button>
+            <button onclick="saveMatch('B')" class="btn-win-b">VINCE SQUADRA B</button>
         </div>
+    </div>
+</div>
     </section>
+
     <section id="admin-section" class="hidden">
         <div class="card">
             <h2>Nuovo Giocatore</h2>
@@ -48,15 +52,14 @@
                 <div class="stat-col"><label>Piedi</label><input type="number" id="stat-foot"></div>
                 <div class="stat-col"><label>Vers.</label><input type="number" id="stat-vers"></div>
             </div>
-            <button class="success" onclick="addPlayer()">Aggiungi Giocatore</button>
+            <button class="success-btn" onclick="addPlayer()">Aggiungi</button>
         </div>
-        <button onclick="syncFromCloud()" style="background:#3498db; color:white; margin-bottom:15px; font-size:12px;">🔄 Forza Sincronizzazione</button>
+        <button class="primary-btn" onclick="forceCloudSync()">💾 SALVA STATO SU CLOUD</button>
         <ul id="master-player-list"></ul>
     </section>
+
     <section id="history-section" class="hidden">
-        <h2>Storico & Classifica</h2>
         <div id="history-list"></div>
-        <button onclick="clearHistory()" style="background:#e74c3c; color:white; margin-top:30px;">Reset Totale</button>
     </section>
 </div>
 <script src="app.js"></script>
