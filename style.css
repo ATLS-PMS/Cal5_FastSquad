@@ -9,20 +9,19 @@ header { background: var(--primary); color: white; text-align: center; padding: 
 .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 15px; }
 .hidden { display: none !important; }
 
-#master-player-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; border-radius: 10px; background: white; border: 1px solid #ddd; }
-.card-avail { border-left: 6px solid var(--success) !important; }
-.card-absent { background: #f9f9f9 !important; opacity: 0.7; border-left: 6px solid #bdc3c7 !important; }
+#master-player-list { list-style: none; }
+#master-player-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; border-radius: 10px; border: 1px solid #ddd; }
+.card-avail { background: white; border-left: 6px solid var(--success) !important; }
+.card-absent { background: #f2f2f2 !important; opacity: 0.8; border-left: 6px solid #bdc3c7 !important; }
 .p-info b { font-size: 16px; color: var(--primary); }
 .p-info small { color: #666; font-size: 11px; display: block; }
-.p-btns { display: flex; gap: 5px; }
-.btn-avail { width: auto; padding: 6px 10px; font-size: 10px; background: #3498db; color: white; border-radius: 6px; border: none; font-weight: bold; }
-.btn-del { width: auto; padding: 6px 12px; background: var(--danger); color: white; border-radius: 6px; border: none; }
 
-.selection-row { background: #fff; padding: 15px; margin-bottom: 6px; border-radius: 8px; border: 1px solid #dcdde1; display: flex; justify-content: space-between; cursor: pointer; }
-.selection-row.selected { background: #dff9fb; border-color: #3498db; border-left: 5px solid #3498db; }
+.selection-row { background: #ffffff; padding: 15px; margin-bottom: 6px; border-radius: 8px; border: 1px solid #dcdde1; display: flex; justify-content: space-between; font-weight: 500; cursor: pointer; }
+.selection-row:nth-child(even) { background: #f8f9fa; }
+.selection-row.selected { background: #dff9fb !important; border-color: #3498db; border-left: 5px solid #3498db; }
 
 .history-card { background: white; padding: 12px; margin-bottom: 8px; border-radius: 8px; border-left: 5px solid #3498db; font-size: 14px; cursor: pointer; }
-.history-details { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ddd; display: none; font-size: 12px; color: #555; }
+.history-details { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ddd; display: none; font-size: 12px; }
 .history-card.open .history-details { display: block; }
 
 button { width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; }
@@ -37,5 +36,9 @@ input, select { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px sol
 .stat-col label { font-size: 10px; color: #7f8c8d; }
 
 .team-box { background: white; padding: 15px; border-radius: 10px; border-top: 5px solid #3498db; margin-bottom: 10px; }
-.team-box h3 { font-size: 14px; margin-bottom: 8px; }
-.team-box ul { list-style: none; font-size: 14px; }
+.team-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+.team-header h3 { font-size: 14px; color: var(--primary); }
+.team-avg-badge { background: #3498db; color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px; }
+.team-box ul { list-style: none; font-size: 14px; margin-top: 8px; }
+.team-box ul li { padding: 4px 0; border-bottom: 1px solid #fafafa; display: flex; justify-content: space-between; }
+.player-ovr-small { color: #999; font-size: 11px; }
