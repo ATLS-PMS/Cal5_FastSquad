@@ -12,6 +12,11 @@ header { background: var(--primary); color: white; text-align: center; padding: 
 #master-player-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; border-radius: 10px; background: white; border: 1px solid #ddd; }
 .card-avail { border-left: 6px solid var(--success) !important; }
 .card-absent { background: #f9f9f9 !important; opacity: 0.7; border-left: 6px solid #bdc3c7 !important; }
+.p-info b { font-size: 16px; color: var(--primary); }
+.p-info small { color: #666; font-size: 11px; display: block; }
+.p-btns { display: flex; gap: 5px; }
+.btn-avail { width: auto; padding: 6px 10px; font-size: 10px; background: #3498db; color: white; border-radius: 6px; border: none; font-weight: bold; }
+.btn-del { width: auto; padding: 6px 12px; background: var(--danger); color: white; border-radius: 6px; border: none; }
 
 .selection-row { background: #fff; padding: 15px; margin-bottom: 6px; border-radius: 8px; border: 1px solid #dcdde1; display: flex; justify-content: space-between; cursor: pointer; }
 .selection-row.selected { background: #dff9fb; border-color: #3498db; border-left: 5px solid #3498db; }
