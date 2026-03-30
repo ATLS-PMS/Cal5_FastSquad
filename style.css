@@ -9,26 +9,32 @@ header { background: var(--primary); color: white; text-align: center; padding: 
 .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 15px; }
 .hidden { display: none !important; }
 
+/* LOG SINCRONIZZAZIONE */
+#sync-info { font-size: 10px; text-align: center; color: #7f8c8d; margin-bottom: 10px; line-height: 1.4; }
+
 /* LISTA ADMIN */
 #master-player-list { list-style: none; }
 #master-player-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; border-radius: 10px; border: 1px solid #ddd; transition: 0.2s; }
 .card-avail { background: white; border-left: 6px solid var(--success) !important; }
 .card-absent { background: #f2f2f2 !important; opacity: 0.8; border-left: 6px solid #bdc3c7 !important; }
 
-.p-info b { font-size: 16px; color: var(--primary); }
+.p-info b { font-size: 15px; color: var(--primary); }
 .p-info small { color: #666; font-size: 11px; display: block; }
 
-.p-btns { display: flex; gap: 8px; width: 100px; }
+.p-btns { display: flex; gap: 5px; width: 100px; }
 /* Tasti colorati come richiesto */
-.btn-p-a { flex: 2; padding: 8px; color: white; border-radius: 6px; font-size: 11px; font-weight: bold; border: none; }
-.btn-p-a.is-avail { background: var(--success); }
-.btn-p-a.is-absent { background: var(--warning); }
+.btn-p-a { flex: 2; padding: 8px 12px; color: white; border-radius: 6px; font-size: 10px; font-weight: bold; border: none; min-width: 80px; cursor: pointer}
+.is-avail { background: var(--success) !important; }
+.is-absent { background: var(--warning) !important; }
 .btn-del { flex: 1; background: var(--danger); color: white; border-radius: 6px; border: none; font-weight: bold; }
 
 /* LISTA SELEZIONE */
 .selection-row { background: #ffffff; padding: 15px; margin-bottom: 6px; border-radius: 8px; border: 1px solid #dcdde1; display: flex; justify-content: space-between; font-weight: 500; cursor: pointer; }
 .selection-row:nth-child(even) { background: #f8f9fa; }
 .selection-row.selected { background: #dff9fb !important; border-color: #3498db; border-left: 5px solid #3498db; }
+
+button.primary-btn { background: #3498db; color: white; margin-bottom: 10px; }
+button.success-btn { background: var(--success); color: white; margin-top: 5px; }
 
 /* SQUADRE */
 .team-box { background: white; padding: 15px; border-radius: 10px; border-top: 5px solid #3498db; margin-bottom: 10px; }
@@ -46,3 +52,9 @@ input { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd;
 .stats-inputs { display: flex; gap: 5px; margin-bottom: 10px;}
 .stat-col { flex: 1; text-align: center; }
 .stat-col label { font-size: 10px; color: #7f8c8d; }
+
+/* STORICO - PULIZIA E NASCONDIMENTO */
+.history-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 10px; border-left: 5px solid #3498db; cursor: pointer; }
+.history-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 13px; }
+.history-details { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #eee; font-size: 12px; color: #444; display: none; }
+.history-card.open .history-details { display: block; }
