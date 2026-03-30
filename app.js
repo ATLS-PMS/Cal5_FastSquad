@@ -3,7 +3,7 @@ var selectedPlayersIds = [];
 var matchHistory = [];
 var currentTeams = { a: [], b: [] };
 
-var GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbwpyrNwxyTHpvGdJymlMTxbkko6j7wxIFQGK_StMWhop890slGifHyHy09gOBB2weCB/exec"; 
+var GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbz7-eZ5kua5H6dIEZmi10AOEq6Qbihvnq-JBKRrBLsJ6JYC_dKTg2Xx-MQVozs7aT1N/exec"; 
 
 window.onload = function() {
     var p = localStorage.getItem('fc_players');
@@ -16,10 +16,10 @@ window.onload = function() {
     
     renderAll();
     
-    // Se c'erano squadre salvate, mostrale
+    // Se c'erano squadre generate ma non salvate, mostrale
     if(currentTeams.a && currentTeams.a.length > 0) {
         document.getElementById('teams-result').className = '';
-        renderTeams();
+        renderActiveTeams();
     }
 };
 
@@ -57,9 +57,16 @@ function addPlayer() {
     }
     saveData(); renderAll();
     document.getElementById('player-name').value = "";
-    document.getElementById('stat-run').value = "";
-    document.getElementById('stat-foot').value = "";
-    document.getElementById('stat-vers').value = "";
+    document.getElementById('stat-run').value = ""; document.getElementById('stat-foot').value = ""; document.getElementById('stat-vers').value = "";
+}
+
+function deletePlayer(id) {
+    if(!confirm("Eliminare definitivamente?")) return;
+    var nuovo = [];
+    for(var i=0; i<playersPool.length; i++) {
+        if(playersPool[i].id !== id) nuovo.push(playersPool[i]);
+    }
+    playersPool = nuovo; saveData(); renderAll();
 }
 
 function toggleAvail(id) {
@@ -67,15 +74,6 @@ function toggleAvail(id) {
         if(playersPool[i].id === id) { playersPool[i].available = !playersPool[i].available; break; }
     }
     saveData(); renderAll();
-}
-
-function deletePlayer(id) {
-    if(!confirm("Eliminare?")) return;
-    var nuovo = [];
-    for(var i=0; i<playersPool.length; i++) {
-        if(playersPool[i].id !== id) nuovo.push(playersPool[i]);
-    }
-    playersPool = nuovo; saveData(); renderAll();
 }
 
 function toggleSelect(id) {
@@ -86,7 +84,7 @@ function toggleSelect(id) {
 }
 
 function generateTeams() {
-    if(selectedPlayersIds.length !== 10) { alert("Seleziona esattamente 10 persone!"); return; }
+    if(selectedPlayersIds.length !== 10) { alert("Seleziona 10 persone!"); return; }
     var playing = [];
     for(var i=0; i<playersPool.length; i++) {
         if(selectedPlayersIds.indexOf(playersPool[i].id) > -1) playing.push(playersPool[i]);
@@ -97,12 +95,11 @@ function generateTeams() {
     currentTeams.b = playing.slice(5, 10);
 
     saveData();
-    renderTeams();
-    
+    renderActiveTeams();
     document.getElementById('teams-result').className = '';
 }
 
-function renderTeams() {
+function renderActiveTeams() {
     var hA = ""; for(var a=0; a<5; a++) hA += "<li>"+currentTeams.a[a].name+"</li>";
     document.querySelector('#team-a ul').innerHTML = hA;
     
@@ -119,38 +116,42 @@ function saveMatch(winner) {
     var mvp = document.getElementById('mvp-select').value;
     if(!mvp) { alert("Scegli l'MVP!"); return; }
 
-    if(winner === 'A' || winner === 'B') {
-        var vincenti = (winner === 'A') ? currentTeams.a : currentTeams.b;
-        for(var i=0; i<5; i++) {
-            for(var j=0; j<playersPool.length; j++) {
-                if(playersPool[j].id === vincenti[i].id) playersPool[j].wins++;
-            }
+    var nomiA = [];
+    for(var i=0; i<currentTeams.a.length; i++) {
+        nomiA.push(currentTeams.a[i].name);
+        if(winner === 'A') {
+            var pA = playersPool.find(function(x){return x.id === currentTeams.a[i].id});
+            if(pA) pA.wins++;
+        }
+    }
+    
+    var nomiB = [];
+    for(var j=0; j<currentTeams.b.length; j++) {
+        nomiB.push(currentTeams.b[j].name);
+        if(winner === 'B') {
+            var pB = playersPool.find(function(x){return x.id === currentTeams.b[j].id});
+            if(pB) pB.wins++;
         }
     }
 
     var match = {
-        date: new Date().toLocaleDateString(),
+        date: new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}),
         score: (winner === 'Pareggio') ? 'Pareggio' : 'Vince ' + winner,
         mvp: mvp,
-        teamA: [], teamB: []
+        teamA: nomiA,
+        teamB: nomiB
     };
-    for(var x=0; x<5; x++) { match.teamA.push(currentTeams.a[x].name); match.teamB.push(currentTeams.b[x].name); }
 
-    // INVIO A GOOGLE SHEETS (Metodo compatibile Safari)
+    // INVIO A GOOGLE SHEETS
     if(GOOGLE_SHEET_URL && GOOGLE_SHEET_URL.length > 10) {
-        var formData = new FormData();
-        formData.append('data', JSON.stringify(match));
-        
-        fetch(GOOGLE_SHEET_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(match)
-        }).catch(function(e){ console.log("Errore invio: ", e); });
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", GOOGLE_SHEET_URL, true);
+        xhr.send(JSON.stringify(match));
     }
 
     matchHistory.unshift(match);
     selectedPlayersIds = [];
-    currentTeams = { a: [], b: [] }; // Reset squadre dopo il salvataggio
+    currentTeams = { a: [], b: [] }; 
     for(var k=0; k<playersPool.length; k++) playersPool[k].available = false;
     
     saveData(); renderAll();
@@ -166,7 +167,7 @@ function renderAll() {
         var p = poolOrdinato[i];
         var bgClass = p.available ? "card-avail" : "card-absent";
         hM += "<li class='"+bgClass+"'>" +
-              "<div class='p-info'><b>"+p.name+"</b><br><small>Voti: C:"+p.run+" P:"+p.foot+" V:"+p.vers+" | 🏆"+p.wins+"</small></div>" +
+              "<div class='p-info'><b>"+p.name+"</b><small>C:"+p.run+" P:"+p.foot+" V:"+p.vers+" | 🏆"+p.wins+"</small></div>" +
               "<div class='p-btns'>" +
               "<button class='btn-avail' onclick='toggleAvail("+p.id+")'>"+(p.available?'PRESENTE':'ASSENTE')+"</button>" +
               "<button class='btn-del' onclick='deletePlayer("+p.id+")'>X</button></div></li>";
@@ -185,32 +186,34 @@ function renderAll() {
     document.getElementById('selection-player-list').innerHTML = hS;
     document.getElementById('selected-count').innerText = selectedPlayersIds.length;
 
-    // 3. STORICO
+    // 3. STORICO ESPANDIBILE
     var hH = "";
-    for(var k=0; k<matchHistory.length && k<10; k++) {
+    for(var k=0; k < matchHistory.length; k++) {
         var m = matchHistory[k];
-        hH += "<div class='history-card'><b>"+m.date+"</b>: "+m.score+"<br><small>MVP: "+m.mvp+"</small></div>";
+        hH += "<div class='history-card' onclick='this.classList.toggle(\"open\")'>" +
+              "<div style='display:flex; justify-content:space-between'><b>"+m.date+"</b><b>"+m.score+"</b></div>" +
+              "<div style='color:#e67e22; font-size:12px; margin-top:3px'>MVP: "+m.mvp+"</div>" +
+              "<div class='history-details'><div class='team-list-history'>" +
+              "<div><b>Squadra A</b>"+(m.teamA?m.teamA.join('<br>'):'-')+"</div>" +
+              "<div><b>Squadra B</b>"+(m.teamB?m.teamB.join('<br>'):'-')+"</div>" +
+              "</div></div></div>";
     }
     document.getElementById('history-list').innerHTML = hH;
 }
 
 function copyTeamsToClipboard() {
-    var txt = "⚽ SQUADRE DI OGGI\n\n🔴 SQUADRA A:\n";
+    var txt = "⚽ SQUADRE DEL PROSSIMO MATCH\n\n🔴 A:\n";
     for(var i=0; i<5; i++) txt += "- " + currentTeams.a[i].name + "\n";
-    txt += "\n🔵 SQUADRA B:\n";
+    txt += "\n🔵 B:\n";
     for(var j=0; j<5; j++) txt += "- " + currentTeams.b[j].name + "\n";
-    
-    var el = document.createElement('textarea');
-    el.value = txt; document.body.appendChild(el);
-    el.select(); document.execCommand('copy');
-    document.body.removeChild(el);
-    alert("Copiato negli appunti!");
+    var el = document.createElement('textarea'); el.value = txt; document.body.appendChild(el);
+    el.select(); document.execCommand('copy'); document.body.removeChild(el);
+    alert("Formazioni copiate!");
 }
 
 function clearHistory() {
-    if(confirm("Attenzione: questo cancellerà tutto lo storico e azzererà le vittorie di tutti. Procedere?")) {
-        matchHistory = [];
-        for(var i=0; i<playersPool.length; i++) playersPool[i].wins = 0;
+    if(confirm("Vuoi cancellare tutto?")) {
+        matchHistory = []; for(var i=0; i<playersPool.length; i++) playersPool[i].wins = 0;
         saveData(); renderAll();
     }
 }
