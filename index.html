@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>La Macelleria PMS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>La Macelleria PMS</h1>
+    <div id="nav-tabs">
+        <button onclick="showSection('main-section')">Campo</button>
+        <button onclick="showSection('admin-section')">Giocatori</button>
+        <button onclick="showSection('history-section')">Storico</button>
+    </div>
+</header>
+
+<div class="container">
+    <section id="main-section">
+        <div class="card">
+            <h2>Convocati (<span id="selected-count">0</span>/10)</h2>
+            <ul id="selection-player-list"></ul>
+            <button class="success" onclick="generateTeams()">Genera Squadre Bilanciate</button>
+        </div>
+
+        <div id="teams-result" class="hidden">
+            <div class="teams-container">
+                <div class="team-box" id="team-a"><h3>SQUADRA A</h3><ul></ul></div>
+                <div class="team-box" id="team-b"><h3>SQUADRA B</h3><ul></ul></div>
+            </div>
+            <button class="whatsapp-btn" onclick="copyTeamsToClipboard()">Copia per WhatsApp 📱</button>
+            
+            <div class="card result-input">
+                <h3>Chi ha vinto?</h3>
+                <div class="win-buttons">
+                    <button onclick="saveMatch('A')">Vince A</button>
+                    <button onclick="saveMatch('Pareggio')" style="background:#95a5a6">Pareggio</button>
+                    <button onclick="saveMatch('B')">Vince B</button>
+                </div>
+                <div style="margin-top:15px">
+                    <label>MVP della partita:</label>
+                    <select id="mvp-select"></select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="admin-section" class="hidden">
+        <div class="card">
+            <h2>Nuovo / Aggiorna</h2>
+            <input type="text" id="player-name" placeholder="Nome Collega">
+            <div class="stats-inputs">
+                <div class="stat-col"><label>Corsa</label><input type="number" id="stat-run" min="1" max="10"></div>
+                <div class="stat-col"><label>Piedi</label><input type="number" id="stat-foot" min="1" max="10"></div>
+                <div class="stat-col"><label>Vers.</label><input type="number" id="stat-vers" min="1" max="10"></div>
+            </div>
+            <button class="success" onclick="addPlayer()">Salva Giocatore</button>
+        </div>
+        <div class="card">
+            <button class="secondary" onclick="exportData()">Scarica Backup</button>
+            <button class="secondary" onclick="importData()">Carica Backup</button>
+        </div>
+        <ul id="master-player-list"></ul>
+    </section>
+
+    <section id="history-section" class="hidden">
+        <h2>Ultime Partite & MVP</h2>
+        <div id="history-list"></div>
+        <button class="secondary" onclick="clearHistory()" style="background:#c0392b; margin-top:20px">Reset Totale</button>
+    </section>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
