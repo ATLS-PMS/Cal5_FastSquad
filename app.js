@@ -5,7 +5,7 @@ let matchHistory = [];
 let currentTeams = { a: [], b: [] };
 
 // CONFIGURAZIONE: Incolla qui l'URL della Web App di Google Sheets se ce l'hai
-const GOOGLE_SHEET_URL = https://script.google.com/macros/s/AKfycbzmv9q4YjQ3hfvvRYGrPyBZQcoMtGSX_a-HK7T6zHymgf-3ODMH9Jos8NsCk-LD9Kp1/exec; 
+const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbzmv9q4YjQ3hfvvRYGrPyBZQcoMtGSX_a-HK7T6zHymgf-3ODMH9Jos8NsCk-LD9Kp1/exec"; 
 
 window.onload = () => { loadAllData(); renderAll(); };
 
