@@ -9,43 +9,28 @@ header { background: var(--primary); color: white; text-align: center; padding: 
 .card { background: white; padding: 15px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 15px; }
 .hidden { display: none !important; }
 
-/* LISTA ADMIN */
-#master-player-list { list-style: none; }
 #master-player-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px; margin-bottom: 8px; border-radius: 10px; background: white; border: 1px solid #ddd; }
 .card-avail { border-left: 6px solid var(--success) !important; }
 .card-absent { background: #f9f9f9 !important; opacity: 0.7; border-left: 6px solid #bdc3c7 !important; }
-.p-info b { font-size: 16px; color: var(--primary); }
-.p-info small { color: #666; font-size: 11px; display: block; }
-.p-btns { display: flex; gap: 5px; }
-.btn-avail { width: auto; padding: 6px 10px; font-size: 10px; background: #3498db; color: white; border-radius: 6px; border: none; font-weight: bold; }
-.btn-del { width: auto; padding: 6px 12px; background: var(--danger); color: white; border-radius: 6px; border: none; }
 
-/* LISTA CAMPO */
-#selection-player-list { list-style: none; }
-.selection-row { background: #fff; padding: 15px; margin-bottom: 6px; border-radius: 8px; border: 1px solid #dcdde1; display: flex; justify-content: space-between; font-weight: 500; cursor: pointer; }
-.selection-row.selected { background: #dff9fb; border-color: #3498db; color: #2c3e50; border-left: 5px solid #3498db; }
-.badge-ovr { background: #f1f2f6; padding: 2px 8px; border-radius: 4px; font-size: 12px; color: #7f8c8d; }
+.selection-row { background: #fff; padding: 15px; margin-bottom: 6px; border-radius: 8px; border: 1px solid #dcdde1; display: flex; justify-content: space-between; cursor: pointer; }
+.selection-row.selected { background: #dff9fb; border-color: #3498db; border-left: 5px solid #3498db; }
 
-/* STORICO ESPANDIBILE */
 .history-card { background: white; padding: 12px; margin-bottom: 8px; border-radius: 8px; border-left: 5px solid #3498db; font-size: 14px; cursor: pointer; }
-.history-details { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ddd; font-size: 12px; display: none; }
+.history-details { margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ddd; display: none; font-size: 12px; color: #555; }
 .history-card.open .history-details { display: block; }
-.team-list-history { display: flex; justify-content: space-between; gap: 10px; }
-.team-list-history div { flex: 1; }
-.team-list-history b { font-size: 10px; text-transform: uppercase; color: #7f8c8d; display: block; margin-bottom: 3px; }
 
-/* BOTTONI E INPUT */
 button { width: 100%; padding: 12px; border-radius: 8px; font-weight: bold; border: none; cursor: pointer; }
 .success { background: var(--success); color: white; }
 .whatsapp-btn { background: #25D366; color: white; margin: 15px 0; }
-.win-buttons { display: flex; gap: 8px; margin-top: 10px; }
-.win-buttons button { flex: 1; color: white; padding: 15px 5px; font-size: 12px; }
+.win-buttons { display: flex; gap: 8px; }
+.win-buttons button { flex: 1; color: white; font-size: 12px; }
+
 input, select { width: 100%; padding: 12px; margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; }
 .stats-inputs { display: flex; gap: 5px; }
-.stat-col { flex: 1; }
-.stat-col label { font-size: 10px; display: block; text-align: center; color: #7f8c8d; }
+.stat-col { flex: 1; text-align: center; }
+.stat-col label { font-size: 10px; color: #7f8c8d; }
 
 .team-box { background: white; padding: 15px; border-radius: 10px; border-top: 5px solid #3498db; margin-bottom: 10px; }
-.team-box h3 { font-size: 14px; margin-bottom: 8px; color: var(--primary); }
-.team-box ul { list-style: none; }
-.team-box ul li { font-size: 14px; padding: 4px 0; border-bottom: 1px solid #f1f1f1; }
+.team-box h3 { font-size: 14px; margin-bottom: 8px; }
+.team-box ul { list-style: none; font-size: 14px; }
