@@ -11,7 +11,7 @@
 <header>
     <h1>La Macelleria PMS</h1>
     <div id="nav-tabs">
-        <button onclick="showSection('main-section')">Campo</button>
+       <button onclick="showSection('main-section')">Campo</button>
         <button onclick="showSection('admin-section')">Giocatori</button>
         <button onclick="showSection('history-section')">Storico</button>
     </div>
@@ -21,44 +21,50 @@
     <section id="main-section">
         <div class="card">
             <h2>Convocati (<span id="selected-count">0</span>/10)</h2>
+            <p style="font-size:11px; color:gray; margin-bottom:10px">Seleziona 10 tra i presenti per generare le squadre</p>
             <ul id="selection-player-list"></ul>
-            <button class="success" onclick="generateTeams()">Genera Squadre</button>
+            <button class="success" onclick="generateTeams()">Genera Squadre Bilanciate</button>
         </div>
 
         <div id="teams-result" class="hidden">
             <div class="team-box" id="team-a"><h3>SQUADRA A</h3><ul></ul></div>
             <div class="team-box" id="team-b"><h3>SQUADRA B</h3><ul></ul></div>
-            <button class="whatsapp-btn" onclick="copyTeamsToClipboard()">Copia WhatsApp 📱</button>
+            <button class="whatsapp-btn" onclick="copyTeamsToClipboard()">Copia per WhatsApp 📱</button>
             
             <div class="card">
-                <h3>Risultato & MVP</h3>
+                <h3>Chi ha vinto?</h3>
                 <div class="win-buttons">
                     <button onclick="saveMatch('A')" style="background:#2ecc71">Vince A</button>
                     <button onclick="saveMatch('Pareggio')" style="background:#95a5a6">Pareggio</button>
                     <button onclick="saveMatch('B')" style="background:#3498db">Vince B</button>
                 </div>
-                <select id="mvp-select" style="margin-top:15px"></select>
+                <div style="margin-top:15px">
+                    <label style="font-size:12px; font-weight:bold">MVP della serata:</label>
+                    <select id="mvp-select" style="margin-top:5px"></select>
+                </div>
             </div>
         </div>
     </section>
 
     <section id="admin-section" class="hidden">
         <div class="card">
-            <input type="text" id="player-name" placeholder="Nome">
+            <h2>Nuovo Giocatore</h2>
+            <input type="text" id="player-name" placeholder="Nome Collega">
             <div class="stats-inputs">
-                <input type="number" id="stat-run" placeholder="Corsa">
-                <input type="number" id="stat-foot" placeholder="Piedi">
-                <input type="number" id="stat-vers" placeholder="Vers">
+                <div class="stat-col"><label>Corsa</label><input type="number" id="stat-run" min="1" max="10"></div>
+                <div class="stat-col"><label>Piedi</label><input type="number" id="stat-foot" min="1" max="10"></div>
+                <div class="stat-col"><label>Vers.</label><input type="number" id="stat-vers" min="1" max="10"></div>
             </div>
-            <button class="success" onclick="addPlayer()">Salva Giocatore</button>
+            <button class="success" onclick="addPlayer()">Salva nel Database</button>
         </div>
         <ul id="master-player-list"></ul>
     </section>
 
     <section id="history-section" class="hidden">
-        <h2>Ultime Partite</h2>
+        <h2>Classifica & Archivio</h2>
+        <p style="font-size:11px; color:gray; margin-bottom:10px">Tocca una partita per vedere le formazioni</p>
         <div id="history-list"></div>
-        <button onclick="clearHistory()" style="background:red; color:white; margin-top:20px; width:100%; padding:10px; border-radius:8px; border:none">Reset Totale</button>
+        <button onclick="clearHistory()" style="background:#e74c3c; color:white; margin-top:30px; border:none; padding:12px; border-radius:8px; width:100%; font-weight:bold">Reset Totale Dati</button>
     </section>
 </div>
 
