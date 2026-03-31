@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>La Macelleria PMS</title>
+	
+    <link rel="apple-touch-icon" href="icon.png">
+    
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PMS Calcetto">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -22,15 +29,54 @@
         <span id="last-sync-time">---</span>
     </div>
 
+
     <section id="main-section">
-        <div class="card">
-            <h2>Convocati (<span id="selected-count">0</span>/10)</h2>
-            <ul id="selection-player-list"></ul>
+<div class="settings-outer-container">
+    <div class="settings-header" onclick="toggleSettingsPanel()">
+        <h2>Impostazioni Partita</h2>
+        <span id="settings-toggle-icon" class="icon-gear">&#9881;</span> 
+    </div>
+
+    <div id="settings-panel-content" class="settings-content hidden-panel">
+        <div class="settings-row">
+            <label for="match-day-select">Giorno:</label>
+            <select id="match-day-select">
+                <option value="1">Lunedì</option>
+                <option value="2">Martedì</option>
+                <option value="3">Mercoledì</option>
+                <option value="4" selected>Giovedì</option> <option value="5">Venerdì</option>
+                <option value="6">Sabato</option> <option value="0">Domenica</option> </select>
+        </div>
+
+        <div class="settings-row time-row">
+            <div class="time-col">
+                <label for="match-time-start">Ora Inizio:</label>
+                <input type="time" id="match-time-start" value="18:00">
+            </div>
+            <div class="time-col">
+                <label for="match-time-end">Ora Fine:</label>
+                <input type="time" id="match-time-end" value="19:00">
+            </div>
+        </div>
+
+        <div class="settings-row">
+            <label for="match-location">Luogo:</label>
+            <input type="text" id="match-location" placeholder="Es: Campi San Siro" value="DIVI SPORT - Via Giuseppe Mazzini 26 / Via Cavour 89, 36077 Altavilla Vicentina (VI)">
+        </div>
+    </div>
+</div>
+    <div class="card">
+        <h2>Convocati (<span id="selected-count">0</span>/10)</h2>
+        <ul id="selection-player-list"></ul>
             <button class="success-btn" onclick="generateTeams()">Genera Squadre</button>
         </div>
      <div id="teams-result" class="hidden">
     <div class="team-box" id="team-a-container"></div>
     <div class="team-box" id="team-b-container"></div>
+	
+	<button onclick="generateAIPrompt()" class="primary-btn" style="background:#673ab7; margin-bottom:15px;">
+        ✨ GENERA PROMPT LOCANDINA
+    </button>
 
     <div class="card result-card">
         <h3>VERDETTO FINALE</h3>
