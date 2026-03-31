@@ -198,3 +198,89 @@ input[type="text"], input[type="number"], select {
     margin-bottom: 15px;
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
+
+/* === STILI PER PANNELLO IMPOSTAZIONI A SCOMPARSA === */
+
+.settings-outer-container {
+    background-color: #f9f9f9; /* Un grigio molto chiaro per distinguerlo */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    overflow: hidden; /* Importante per l'effetto a scomparsa */
+}
+
+/* Intestazione clikkabile */
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.settings-header:hover {
+    background-color: #e0e0e0; /* Effetto hover per far capire che è clikkabile */
+}
+
+.settings-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+/* L'icona della rotellina */
+.icon-gear {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease; /* Animazione di rotazione */
+}
+
+/* Classe che faremo aggiungere al JS per ruotare l'icona quando aperto */
+.icon-gear.rotate {
+    transform: rotate(90deg);
+}
+
+/* Contenitore del contenuto */
+.settings-content {
+    padding: 15px;
+    /* Transizione fluida per l'altezza (richiede JS per calcolare l'altezza esatta, 
+       ma per ora usiamo display:none per semplicità) */
+    transition: max-height 0.3s ease-out; 
+}
+
+/* Classe per nascondere il pannello */
+.hidden-panel {
+    display: none;
+}
+
+/* Stili per le righe dentro il pannello (preservando il layout precedente) */
+.settings-row {
+    margin-bottom: 10px;
+}
+
+.settings-row label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.settings-row select, 
+.settings-row input[type="text"],
+.settings-row input[type="time"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Importante per il padding */
+}
+
+.time-row {
+    display: flex;
+    gap: 10px;
+}
+
+.time-col {
+    flex: 1;
+}
