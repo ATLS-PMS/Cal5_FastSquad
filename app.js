@@ -4,7 +4,7 @@ var matchHistory = [];
 var currentTeams = { a: [], b: [] };
 
 // CONFIGURAZIONE: Inserisci il tuo URL /exec di Google
-var GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyts2iYS6Ex5-uo1V636TUpL1Qeab-LPx3F_7nW9Ezh_f7xDRFVOAw6x065AEn-oT8W/exec"; 
+var GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyAGBwnv6Sb29naP4warPW_7LInkpYQJYwYgIAL54okpOFTcNSm8G5_R07GeVhGpIdj/exec"; 
 
 // --- INIZIALIZZAZIONE ---
 window.onload = function() {
