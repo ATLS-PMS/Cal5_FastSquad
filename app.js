@@ -79,22 +79,43 @@ function syncFromCloud() {
 function addPlayer() {
     var name = document.getElementById('player-name').value.trim();
     if(!name) return;
+    
     var r = parseInt(document.getElementById('stat-run').value) || 5;
     var f = parseInt(document.getElementById('stat-foot').value) || 5;
     var v = parseInt(document.getElementById('stat-vers').value) || 5;
     var ovr = Math.round((r+f+v)/3);
     
-    playersPool.push({
-        id: Date.now(), 
-        name: name, 
-        run: r, foot: f, vers: v, 
-        overall: ovr, 
-        wins: 0, 
-        available: true
-    });
+    // Controlla se il giocatore esiste già (ricerca per nome, ignorando maiuscole/minuscole)
+    var existingPlayer = playersPool.find(p => p.name.toLowerCase() === name.toLowerCase());
     
+    if (existingPlayer) {
+        // AGGIORNA GIOCATORE ESISTENTE
+        existingPlayer.run = r;
+        existingPlayer.foot = f;
+        existingPlayer.vers = v;
+        existingPlayer.overall = ovr;
+        alert("Valutazioni di " + existingPlayer.name + " aggiornate con successo!");
+    } else {
+        // CREA NUOVO GIOCATORE
+        playersPool.push({
+            id: Date.now(), 
+            name: name, 
+            run: r, foot: f, vers: v, 
+            overall: ovr, 
+            wins: 0, 
+            available: true
+        });
+        alert("Nuovo giocatore " + name + " aggiunto!");
+    }
+    
+    // Salva e renderizza
     localStorage.setItem('fc_players', JSON.stringify(playersPool));
     document.getElementById('player-name').value = "";
+    // Reset dei campi statistiche a 5 (opzionale, per comodità)
+    document.getElementById('stat-run').value = 5;
+    document.getElementById('stat-foot').value = 5;
+    document.getElementById('stat-vers').value = 5;
+    
     renderAll();
 }
 
