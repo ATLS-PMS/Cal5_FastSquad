@@ -94,9 +94,9 @@
             <h2>Nuovo Giocatore</h2>
             <input type="text" id="player-name" placeholder="Nome">
             <div class="stats-inputs">
-                <div class="stat-col"><label>Corsa</label><input type="number" id="stat-run"></div>
-                <div class="stat-col"><label>Piedi</label><input type="number" id="stat-foot"></div>
-                <div class="stat-col"><label>Vers.</label><input type="number" id="stat-vers"></div>
+                <div class="stat-col"><label>Corsa</label><input type="number" id="stat-run" step="0.5" min="0" max="10" value="6.0"></div>
+                <div class="stat-col"><label>Piedi</label><input type="number" id="stat-foot"step="0.5" min="0" max="10" value="6.0"></div>
+                <div class="stat-col"><label>Vers.</label><input type="number" id="stat-vers"step="0.5" min="0" max="10" value="6.0"></div>
             </div>
             <button class="success-btn" onclick="addPlayer()">Aggiungi</button>
         </div>
