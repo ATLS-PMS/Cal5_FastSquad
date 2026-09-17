@@ -136,9 +136,9 @@ function toggleSettingsPanel() {
 function addPlayer() {
     var name = document.getElementById('player-name').value.trim();
     if(!name) return;
-    var r = parseInt(document.getElementById('stat-run').value) || 5;
-    var f = parseInt(document.getElementById('stat-foot').value) || 5;
-    var v = parseInt(document.getElementById('stat-vers').value) || 5;
+    var r = parseFloat(document.getElementById('stat-run').value) || 5;
+    var f = parseFloat(document.getElementById('stat-foot').value) || 5;
+    var v = parseFloat(document.getElementById('stat-vers').value) || 5;
     var ovr = parseFloat(((r+f+v)/3).toFixed(1));
     
 	var existing = playersPool.find(p => p.name.toLowerCase() === name.toLowerCase());
@@ -343,31 +343,31 @@ function generateAIPrompt() {
     var nomiB = currentTeams.b.map(p => p.name).join(", ");
 
     // 4. Assembla il prompt finale
-    var prompt = `Agisci come un Graphic Designer esperto in marketing sportivo.
-Obiettivo: Progetta una locandina accattivante per una partita di calcio a 5.
-Stile Visivo richiesto:
-- Definizione dello Stile: Finale di Champions League
-- Gerarchia Visiva: Deve risaltare di più la sfida tra i nomi
-- Mood: Dinamico ed energico, stile "Match Day" professionale.
-- Colori: Contrasto netto: Blu vs Argento per distinguere le squadre.
-- Sfondo: Un'immagine stilizzata di un campo da calcetto sintetico o un pallone da calcio in movimento con effetti di luce/glow.
-- Tema generico: toni chiari
-- Font: Caratteri bold, moderni e facilmente leggibili.
-
-Layout:
-- In alto, un titolo d'impatto a tema
-- Al centro, i nomi dei giocatori divisi per squadra con un "VS" stilizzato nel mezzo.
-- In basso, i dettagli logistici (Data, Ora, Luogo) ben organizzati e visibili.
-
-Dettagli dell'Evento:
-- Data: ${dataMatch}
-- Orario: ${oraInizio} – ${oraFine}
-- Luogo: ${luogo}
-
-Formazioni:
-- Team A: ${nomiA}
-- Team B: ${nomiB}`;
-
+    var prompt = `Act like a marketing sports expert Graphic Designer.
+	Generate a high-resolution, high-energy futuristic futsal championship match day poster, based on a complex, glowing arena grid background with intense blue lighting.
+    Header Section:
+    Top-centered, a large, bold, futuristic white text block with a blue glowing edge reads: "FUTSAL CHAMPIONS MATCH DAY".
+    Two large symmetrical team panels below the title are separated by a central, fragmented metallic "VS" symbol with energy crackles.
+    Left Team (bordeaux color theme):
+    The detailed, crested bordeaux-and-gold shield emblem. Inside the shield, a crown, a wine bottle, grapes, and a grapevine pattern. Below the shield, a ribbon with gold cursive text reads: "HERTA VERNELLO".
+    Below the emblem, a horizontal white bar with bordeaux text reads: "HERTA VERNELLO".
+    A deep bordeaux-purple panel below the bar contains a left-aligned list of players in clean, white, bold sans-serif text:
+    ${nomiA}
+    Right Team (gold/green color theme):
+    The detailed, crested gold-and-green shield emblem. Inside the shield, a crown, a beer tankard, wheat stalks, and a wheat pattern. Below the shield, a ribbon with gold cursive text reads: "ASTON BIRRA".
+    Below the emblem, a horizontal white bar with deep green text reads: "ASTON BIRRA".
+    A deep blue-green panel below the bar contains a left-aligned list of players in clean, white, bold sans-serif text:
+    ${nomiB}
+    Midground:
+    Below the team panels, a dynamic futsal ball with an intense, fiery, electric energy trail of blue, gold, and white light. Scattered geometric glass shards.
+    Footer Section:
+    A dark footer bar at the bottom with clear match details and icons:
+        A calendar icon and text: "DATA: ${dataMatch}" in large, white text.
+        A clock icon and text: "ORARIO: ${oraInizio} – ${oraFine}" in large, white text.
+        A map pin icon and text: "LUOGO: ${luogo}" in large, white text. Smaller white detailed address text below the map pin text
+    Overall Style:
+    Futuristic, high-tech sports broadcast style. Intense blue, bordeaux, and gold color contrasts. Clear, sharp typography. Professional logos and emblems. The complex arena background with glowing lines is consistent throughout`;
+	
     // 5. Copia tutto negli appunti del tuo telefono/PC
     navigator.clipboard.writeText(prompt).then(() => {
         alert("✨ Prompt personalizzato copiato!\nData calcolata: " + dataMatch);
